@@ -23,8 +23,7 @@ pub fn parse_color(s: &str, true_color: bool, git_config: Option<&GitConfig>) ->
             .parse::<u8>()
             .ok()
             .and_then(utils::syntect::syntect_color_from_ansi_number)
-            .or_else(|| utils::syntect::syntect_color_from_ansi_name(s))
-            .or_else(|| utils::syntect::syntect_color_from_name(s));
+            .or_else(|| utils::syntect::syntect_color_from_ansi_name(s));
         if syntect_color.is_none() {
             if let Some(git_config) = git_config {
                 if let Some(val) = git_config.get::<String>(&format!("delta.{}", s)) {
